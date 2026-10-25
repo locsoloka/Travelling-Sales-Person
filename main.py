@@ -32,9 +32,44 @@ class Cities:
 
             self.neighbours.append({i : smallest_d_city})
 
+    def get_islands(self):
+        island = []
+
+        neighbours_cpy = list(self.neighbours)
+
+
+        while neighbours_cpy:
+            current_island = [neighbours_cpy.pop(0)]
+
+            added = True
+            while added:
+                added = False
+                i = 0
+                while i < len(neighbours_cpy):
+                    neighbour = neighbours_cpy[i]
+                    n_keys = set(neighbour.keys())   # set segít nekünk gyorsan összehasonéítani értékeket
+                    n_vals = set(neighbour.values())
+
+                    is_connected = False
+                    for item in current_island:
+                        i_keys = set(item.keys())
+                        i_vals = set(item.values())       
+
+                        if (n_keys & i_keys) or (n_keys & i_vals) or (n_vals & i_keys) or (n_vals & i_vals):
+                            is_connected = True
+                            break
+
+                    if is_connected:
+                        current_island.append(neighbours_cpy.pop(i))
+                        added = True
+                    else:
+                        i += 1
+            island.append(current_island)
+        print("island", island)
 
 cities_instance = Cities()
 cities_instance.get_k_every()
+cities_instance.get_islands()
 print(cities_instance.neighbours)
 vizualize(Cities=cities_instance)
 

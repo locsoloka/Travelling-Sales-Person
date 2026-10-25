@@ -14,15 +14,8 @@ def vizualize(Cities):
             city_a = list(cord.keys())
             city_b = list(cord.values())
 
-            print(city_a[0])
-            print(city_b[0])
-            print()
             x_cords = [Cities.cities[city_a[0]][0], Cities.cities[city_b[0]][0]]
             y_cords = [Cities.cities[city_a[0]][1], Cities.cities[city_b[0]][1]]
-
-
-            #print(Cities.cities[x_cords])
-            #print(Cities.cities[y_cords])
 
             plt.plot(x_cords, y_cords ,color='blue', linewidth=2, marker='o')
     
